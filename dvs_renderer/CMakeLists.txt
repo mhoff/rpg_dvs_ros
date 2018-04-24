@@ -13,7 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 # since we need eigen and boost search them as well
 # find_package makes the ${..._INCLUDE_DIRS} ${..._LIBRARIES} variables we use later
-find_package(OpenCV 2 REQUIRED)
+find_package(OpenCV 3 REQUIRED)
 
 # export the dependencis of this package for who ever depends on us
 catkin_package(
@@ -74,6 +74,10 @@ target_link_libraries(dvs_renderer_nodelet
    ${OpenCV_LIBRARIES}
 )
 
+install(TARGETS dvs_renderer
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 # Install the nodelet library
 install(TARGETS dvs_renderer_nodelet
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
@@ -82,6 +86,6 @@ install(TARGETS dvs_renderer_nodelet
 )
 
 # Install other support files for installation
-install(FILES dvs_renderer_nodelet.xml launch/nodelet_stereo.launch launch/nodelet_mono.launch
+install(FILES dvs_renderer_nodelet.xml launch/nodelet_stereo.launch launch/nodelet_mono.launch launch/renderer_mono.launch
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
 )
